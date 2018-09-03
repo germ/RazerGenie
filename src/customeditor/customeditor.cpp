@@ -23,6 +23,9 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QEvent>
+#include <QSettings>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 CustomEditor::CustomEditor(libopenrazer::Device* device, bool launchMatrixDiscovery, QWidget *parent) : QDialog(parent)
 {
@@ -92,13 +95,20 @@ CustomEditor::CustomEditor(libopenrazer::Device* device, bool launchMatrixDiscov
         closeWindow();
     }
 
-    // Set every LED to "off"/black
-    clearAll();
+    // Set every LED to "off"/black unless loading
+    // exisiting colormap, keyboards for now. Someone send me razer gear plz
+    if (settings.value("exportToJSON").toBool() && type =="keyboard") {
+      loadColours();
+    } else {
+      clearAll();
+    }
 }
 
 CustomEditor::~CustomEditor()
 {
-
+  if (settings.value("exportToJSON").toBool()) {
+    exportToJSON();
+  }
 }
 
 void CustomEditor::closeWindow()
@@ -372,4 +382,136 @@ void CustomEditor::setDrawStatusSet()
 void CustomEditor::setDrawStatusClear()
 {
     drawStatus = DrawStatus::clear;
+}
+
+void CustomEditor::loadColours() {
+  // TODO: Eventual plan, support multiple schemes via a pulldown switcher
+  QString jsonString;
+  QJsonDocument doc;
+  QString devName;
+  QFile file;
+  QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/razergenie/colours/default.json";
+
+  // Check for existing config
+  file.setFileName(path);
+  if (!file.exists()) {
+    QMessageBox::information(0, 
+      tr("Could not find scheme!"), 
+      tr("Could not find : %1\n\n"
+      "A new configuration will be generated.").arg(path));
+
+    return;
+  }
+
+  // Check if device definitions are present
+  file.open(QIODevice::ReadOnly | QIODevice::Text);
+  jsonString = file.readAll();
+  file.close();
+
+  doc = QJsonDocument::fromJson(jsonString.toUtf8());
+  if (doc.isNull()) {
+    QMessageBox::information(0, 
+      tr("Could not parse!"), 
+      tr("Could not parse: %1\n\n"
+      "Please check the document for errors.").arg(path));
+    return;
+  }
+
+  config = doc.object();
+  devName = device->getDeviceName();
+  if (config[devName].isUndefined()) {
+    // Will be added to colormap on save
+    return;
+  }
+
+  // Awesome, we have a config
+  QJsonObject devCfg = config[devName].toObject();
+  qDebug()  << devCfg["Matrix"].toArray();
+  abort();
+  //for (i := 0; i < devCfg["Matrix"].toArray)
+}
+
+// Eventual plan, support multiple schemes via a pulldown switcher
+// For now, just output to default.json, user can manage various outputs
+// These outputs will be parsed by compatiable tooling for setting
+// 
+// A scheme contains definitions for multiple devices id'd by their product
+// name (So configs can be shared). A user may have a scheme "solarized" that
+// sets a keymap, mug color and mouse color. Or something. 
+//
+// Ideally we seperate colour defs from their raw values, instead using 
+// variables. This would allow changing one value to effect all connected
+// devices.
+// TODO: Implement scheme switcher pulldown
+// TODO: Add Vars section to JSON, to allow basic templating
+void CustomEditor::exportToJSON() {
+  QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/razergenie/colours/";
+  QString jsonString;
+  QFile file;
+  QJsonObject json;
+  QJsonArray matrix;
+
+  // TODO: Support mice and other devices, can't test due to
+  // Only having a Blackwidow :(
+  // Idea here is to have various device properties stored
+  // So a color for single colour things, text strings for
+  // a scroller or whatever is needed. Only supports matrix 
+  // Right now
+  if (device->getDeviceType() != "keyboard") {
+    return;
+  }
+
+
+  // Abandon all hope, JSON + QT is absolutely 100% verified terrible
+  // Theres probably a better way to do this using generics or something
+  QString devName = device->getDeviceName();
+  dimens = device->getMatrixDimensions();
+  json["Name"]    = "Default Profile";
+  json["Author"]  = "RazerGenie";
+
+  //Allocate matrix arrays
+  for (int i = 0; i <= dimens[0]; i++) {
+    QJsonArray ins;
+    for (int j = 0; j < dimens[1]; j++) {
+      ins.append("");
+    }
+    matrix.insert(i, ins);
+  }
+
+  // Populate matrix structure
+  for (int i = 0; i < matrixPushButtons.length(); i++) {
+    QPair<int,int> cords = matrixPushButtons[i]->matrixPos();
+    QString keyColour = colors[cords.first][cords.second].name();
+    QJsonArray ins = QJsonArray(matrix[cords.first].toArray());
+    ins.insert(cords.second, keyColour);
+    matrix[cords.first] = ins;
+  }
+
+  // Add device child to scheme
+  QJsonObject devSection;
+  devSection["Type"] = device->getDeviceType();
+  devSection["Matrix"] = matrix;
+
+  // Check if adding to existing config
+  if (!config.isEmpty()) {
+    config[devName] = devSection;
+  } else {
+    json[devName] = devSection;
+    config = json;
+  }
+
+  // Make sure directory exists, write
+  QDir dir(path);
+  dir.mkpath(path);
+  file.setFileName(path + "default.json");
+  file.open(QIODevice::WriteOnly | QIODevice::Text);
+  file.write(QJsonDocument(config).toJson());
+  file.close();
+
+  QMessageBox::information(0, 
+    tr("Colormap exported!"),
+    tr("Your colormap has been written to %1.json\n\n"
+       "Please copy and rename this file if you do not want it to be overwritten!")
+    .arg(path) ,
+    tr("Close"));
 }

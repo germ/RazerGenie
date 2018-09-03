@@ -23,6 +23,7 @@
 #include <QJsonObject>
 #include <libopenrazer.h>
 #include "matrixpushbutton.h"
+#include <QSettings>
 
 enum DrawStatus {
     set, clear
@@ -41,9 +42,12 @@ private:
     QLayout* generateMousemat();
     QLayout* generateMouse();
     QLayout* generateMatrixDiscovery();
+    QSettings settings;
+    QJsonObject config;
 
     bool parseKeyboardJSON(QString jsonname);
     bool updateKeyrow(int row);
+    void loadColours();
     void clearAll();
 
     QJsonObject keyboardKeys;
@@ -59,6 +63,7 @@ private slots:
     void onMatrixPushButtonClicked();
     void setDrawStatusSet();
     void setDrawStatusClear();
+    void exportToJSON();
 };
 
 #endif // CUSTOMEDITOR_H

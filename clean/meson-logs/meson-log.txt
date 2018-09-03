@@ -1,0 +1,166 @@
+Build started at 2018-09-02T08:48:08.876101
+Main binary: /usr/bin/python
+Python system: Linux
+The Meson build system
+Version: 0.47.2
+Source dir: /home/germ/Desktop/RazerGenie
+Build dir: /home/germ/Desktop/RazerGenie/clean
+Build type: native build
+Project name: razergenie
+Project version: undefined
+Sanity testing C++ compiler: c++
+Is cross compiler: False.
+Sanity check compiler command line: c++ /home/germ/Desktop/RazerGenie/clean/meson-private/sanitycheckcpp.cc -o /home/germ/Desktop/RazerGenie/clean/meson-private/sanitycheckcpp.exe
+Sanity check compile stdout:
+
+-----
+Sanity check compile stderr:
+
+-----
+Running test binary command: /home/germ/Desktop/RazerGenie/clean/meson-private/sanitycheckcpp.exe
+Native C++ compiler: c++ (gcc 8.2.0 "c++ (GCC) 8.2.0")
+Build machine cpu family: x86_64
+Build machine cpu: x86_64
+WARNING: rcc dependencies will not work reliably until this upstream issue is fixed: https://bugreports.qt.io/browse/QTBUG-45460
+Found pkg-config: /usr/bin/pkg-config (1.5.3)
+Determining dependency 'Qt5Widgets' with pkg-config executable '/usr/bin/pkg-config'
+Called `/usr/bin/pkg-config --modversion Qt5Widgets` -> 0
+5.11.1
+Called `/usr/bin/pkg-config --cflags Qt5Widgets` -> 0
+-DQT_WIDGETS_LIB -I/usr/include/qt/QtWidgets -I/usr/include/qt -I/usr/include/qt/QtCore -DQT_GUI_LIB -I/usr/include/qt/QtGui -DQT_CORE_LIB
+Called `/usr/bin/pkg-config Qt5Widgets --libs` -> 0
+-lQt5Widgets -lQt5Gui -lQt5Core
+Called `/usr/bin/pkg-config Qt5Widgets --libs` -> 0
+-lQt5Widgets -lQt5Gui -lQt5Core
+Running compile:
+Working directory:  /tmp/tmp_p8hebyk
+Command line:  c++ /tmp/tmp_p8hebyk/testfile.cpp -pipe -D_FILE_OFFSET_BITS=64 -o /tmp/tmp_p8hebyk/output.exe -O0 -fpermissive -Wl,--start-group -lQt5Widgets -Wl,--end-group -Wl,--allow-shlib-undefined 
+
+Code:
+ int main(int argc, char **argv) { return 0; }
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Running compile:
+Working directory:  /tmp/tmplarjze58
+Command line:  c++ /tmp/tmplarjze58/testfile.cpp -pipe -D_FILE_OFFSET_BITS=64 -o /tmp/tmplarjze58/output.exe -O0 -fpermissive -Wl,--start-group -lQt5Gui -Wl,--end-group -Wl,--allow-shlib-undefined 
+
+Code:
+ int main(int argc, char **argv) { return 0; }
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Running compile:
+Working directory:  /tmp/tmpg8qfl8w9
+Command line:  c++ /tmp/tmpg8qfl8w9/testfile.cpp -pipe -D_FILE_OFFSET_BITS=64 -o /tmp/tmpg8qfl8w9/output.exe -O0 -fpermissive -Wl,--start-group -lQt5Core -Wl,--end-group -Wl,--allow-shlib-undefined 
+
+Code:
+ int main(int argc, char **argv) { return 0; }
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Native dependency Qt5Widgets found: YES 5.11.1
+Determining dependency 'Qt5DBus' with pkg-config executable '/usr/bin/pkg-config'
+Called `/usr/bin/pkg-config --modversion Qt5DBus` -> 0
+5.11.1
+Called `/usr/bin/pkg-config --cflags Qt5DBus` -> 0
+-DQT_DBUS_LIB -I/usr/include/qt/QtDBus -I/usr/include/qt -DQT_CORE_LIB -I/usr/include/qt/QtCore
+Called `/usr/bin/pkg-config Qt5DBus --libs` -> 0
+-lQt5DBus -lQt5Core
+Called `/usr/bin/pkg-config Qt5DBus --libs` -> 0
+-lQt5DBus -lQt5Core
+Running compile:
+Working directory:  /tmp/tmpgmifzfrm
+Command line:  c++ /tmp/tmpgmifzfrm/testfile.cpp -pipe -D_FILE_OFFSET_BITS=64 -o /tmp/tmpgmifzfrm/output.exe -O0 -fpermissive -Wl,--start-group -lQt5DBus -Wl,--end-group -Wl,--allow-shlib-undefined 
+
+Code:
+ int main(int argc, char **argv) { return 0; }
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Native dependency Qt5DBus found: YES 5.11.1
+Determining dependency 'Qt5Network' with pkg-config executable '/usr/bin/pkg-config'
+Called `/usr/bin/pkg-config --modversion Qt5Network` -> 0
+5.11.1
+Called `/usr/bin/pkg-config --cflags Qt5Network` -> 0
+-DQT_NETWORK_LIB -I/usr/include/qt/QtNetwork -I/usr/include/qt -DQT_CORE_LIB -I/usr/include/qt/QtCore
+Called `/usr/bin/pkg-config Qt5Network --libs` -> 0
+-lQt5Network -lQt5Core
+Called `/usr/bin/pkg-config Qt5Network --libs` -> 0
+-lQt5Network -lQt5Core
+Running compile:
+Working directory:  /tmp/tmp2l0g783c
+Command line:  c++ /tmp/tmp2l0g783c/testfile.cpp -pipe -D_FILE_OFFSET_BITS=64 -o /tmp/tmp2l0g783c/output.exe -O0 -fpermissive -Wl,--start-group -lQt5Network -Wl,--end-group -Wl,--allow-shlib-undefined 
+
+Code:
+ int main(int argc, char **argv) { return 0; }
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Native dependency Qt5Network found: YES 5.11.1
+Determining dependency 'Qt5Xml' with pkg-config executable '/usr/bin/pkg-config'
+Called `/usr/bin/pkg-config --modversion Qt5Xml` -> 0
+5.11.1
+Called `/usr/bin/pkg-config --cflags Qt5Xml` -> 0
+-DQT_XML_LIB -I/usr/include/qt/QtXml -I/usr/include/qt -DQT_CORE_LIB -I/usr/include/qt/QtCore
+Called `/usr/bin/pkg-config Qt5Xml --libs` -> 0
+-lQt5Xml -lQt5Core
+Called `/usr/bin/pkg-config Qt5Xml --libs` -> 0
+-lQt5Xml -lQt5Core
+Running compile:
+Working directory:  /tmp/tmp8s99iorc
+Command line:  c++ /tmp/tmp8s99iorc/testfile.cpp -pipe -D_FILE_OFFSET_BITS=64 -o /tmp/tmp8s99iorc/output.exe -O0 -fpermissive -Wl,--start-group -lQt5Xml -Wl,--end-group -Wl,--allow-shlib-undefined 
+
+Code:
+ int main(int argc, char **argv) { return 0; }
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Native dependency Qt5Xml found: YES 5.11.1
+Determining dependency 'Qt5Core' with pkg-config executable '/usr/bin/pkg-config'
+Called `/usr/bin/pkg-config --modversion Qt5Core` -> 0
+5.11.1
+Called `/usr/bin/pkg-config --cflags Qt5Core` -> 0
+-DQT_CORE_LIB -I/usr/include/qt/QtCore -I/usr/include/qt
+Called `/usr/bin/pkg-config Qt5Core --libs` -> 0
+-lQt5Core
+Called `/usr/bin/pkg-config Qt5Core --libs` -> 0
+-lQt5Core
+Called `/usr/bin/pkg-config --variable=host_bins Qt5Core` -> 0
+/usr/bin
+Got pkgconfig variable host_bins : /usr/bin
+Qt5 native `pkg-config` dependency (modules: Widgets, DBus, Network, Xml) found: YES
+Message: razergenie: Experimental features disabled.
+Message: razergenie: Matrix discovery feature not included.
+Program lrelease-qt5 found: YES (/usr/bin/lrelease-qt5)
+Program qdoc found: YES (/usr/bin/qdoc)
+Message: Building libopenrazerdemo...
+Configuring config.h using configuration
+Detecting Qt5 tools
+Determining dependency 'Qt5Core' with pkg-config executable '/usr/bin/pkg-config'
+Got pkgconfig variable host_bins : /usr/bin
+ moc: YES (/usr/bin/moc, 5.11.1)
+ uic: YES (/usr/bin/uic, 5.11.1)
+ rcc: YES (/usr/bin/rcc, 5.11.1)
+ lrelease: YES (/usr/bin/lrelease, 5.11.1)
+Build targets in project: 5
+Found ninja-1.8.2 at /usr/bin/ninja
+Running compile:
+Working directory:  /tmp/tmptugg7bk5
+Command line:  c++ /tmp/tmptugg7bk5/testfile.cpp -pipe -D_FILE_OFFSET_BITS=64 -c -o /tmp/tmptugg7bk5/output.obj -O0 -fpermissive --print-search-dirs 
+
+Code:
+ 
+Compiler stdout:
+ install: /usr/lib/gcc/x86_64-pc-linux-gnu/8.2.0/
+programs: =/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.0/../../../../x86_64-pc-linux-gnu/bin/x86_64-pc-linux-gnu/8.2.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.0/../../../../x86_64-pc-linux-gnu/bin/
+libraries: =/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.0/../../../../x86_64-pc-linux-gnu/lib/x86_64-pc-linux-gnu/8.2.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.0/../../../../x86_64-pc-linux-gnu/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.0/../../../x86_64-pc-linux-gnu/8.2.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.0/../../../../lib/:/lib/x86_64-pc-linux-gnu/8.2.0/:/lib/../lib/:/usr/lib/x86_64-pc-linux-gnu/8.2.0/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.0/../../../../x86_64-pc-linux-gnu/lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.0/../../../:/lib/:/usr/lib/
+
+Compiler stderr:
+ 

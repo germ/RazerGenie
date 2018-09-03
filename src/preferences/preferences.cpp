@@ -56,6 +56,13 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent)
         settings.setValue("downloadImages", checked);
     });
 
+    QCheckBox *exportCheckBox = new QCheckBox(this);
+    exportCheckBox->setText(tr("Export matrix as JSON"));
+    exportCheckBox->setChecked(settings.value("exportToJSON").toBool());
+    connect(exportCheckBox, &QCheckBox::clicked, this, [=]( bool checked ) {
+        settings.setValue("exportToJSON", checked);
+    });
+
     QSpacerItem *spacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
     vbox->addWidget(aboutLabel);
@@ -64,6 +71,7 @@ Preferences::Preferences(QWidget *parent) : QDialog(parent)
     vbox->addWidget(generalLabel);
     vbox->addWidget(downloadText);
     vbox->addWidget(downloadCheckBox);
+    vbox->addWidget(exportCheckBox);
     vbox->addItem(spacer);
 
     this->resize(600, 400);
